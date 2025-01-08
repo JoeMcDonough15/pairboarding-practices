@@ -1,0 +1,37 @@
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div id="parent">
+      <p id="not-a-parent">
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+      </p>
+      <div>
+        <div>
+          <ul>
+            <li>
+              I am a child
+              <span>cool</span>
+            </li>
+            <li>I am a child</li>
+            <li>I am a child</li>
+            <li>I am a child</li>
+            <li id="child">I am the child</li>
+            <li>I am a child</li>
+          </ul>
+          <p></p>
+          <div>
+            <p></p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script src="./isDescendant.js"></script>
+  </body>
+</html>
