@@ -62,11 +62,11 @@ const quicksort = (scores) => {
   const leftHalf = [];
   const rightHalf = [];
   // loop over scores and divide up all the elements (except the pivot) into left and right halves
-  for (let i = 0; i < scores.length; i++) {
+  for (let i = 1; i < scores.length; i++) {
     const currentScore = scores[i];
     if (currentScore < pivot) {
       leftHalf.push(currentScore);
-    } else if (currentScore > pivot) {
+    } else {
       rightHalf.push(currentScore);
     }
   }
@@ -74,9 +74,9 @@ const quicksort = (scores) => {
   return [...quicksort(leftHalf), pivot, ...quicksort(rightHalf)];
 };
 
-const unsortedScores = [37, 89, 41, 65, 91, 53];
+const unsortedScores = [37, 89, 41, 40, 40, 40, 40, 65, 91, 53];
 
-// console.log(quicksort(unsortedScores));
+console.log(quicksort(unsortedScores));
 
 // Optimal Solution
 // We can build an array scoreCounts where the indices represent scores and the values represent how many times the score appears in unsortedScores.
@@ -109,7 +109,7 @@ const sortScores = (unsortedScores, highestPossibleScore) => {
   return sortedScores;
 };
 
-console.log(sortScores(unsortedScores, 100));
+// console.log(sortScores(unsortedScores, 100));
 
 // Complexity
 // O(n) time and space.
