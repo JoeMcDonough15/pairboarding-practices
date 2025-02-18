@@ -20,7 +20,7 @@ const makeChange = (target, coins) => {
 
 const findBestChange = (target, coins, memo = {}) => {
   if (memo[target]) {
-    return memo[target].slice();
+    return memo[target].slice(); // shallow copy the reference in memo, so we don't mutate it when returning back a frame and pushing the current coin to it.
   }
   if (target < 0) return null;
   if (target === 0) return [];
@@ -46,11 +46,12 @@ const findBestChange = (target, coins, memo = {}) => {
     }
   });
 
+  // since bestChange could be null, we need the if check because we can't run .slice() on null
   if (bestChange) {
-    memo[target] = bestChange.slice();
+    memo[target] = bestChange.slice(); // always make a copy before saving to memo, so we do not mutate any memoized references.  Since bestChange is an array, we will potentially mutate it after returning out of this frame because we might be returning to a previous stack frame where we are going to push a coin to bestChange.  So store a copy of bestChange in memo before any mutation happens.
   }
 
-  return bestChange;
+  return bestChange; // since this could be null, it won't suffice to return a copy of what was stored in memo, we have to return what bestChange is
 };
 
 // Tests
