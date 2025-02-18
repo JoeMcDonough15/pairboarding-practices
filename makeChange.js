@@ -18,7 +18,10 @@ const makeChange = (target, coins) => {
   return null;
 };
 
-const findBestChange = (target, coins) => {
+const findBestChange = (target, coins, memo = {}) => {
+  if (memo[target]) {
+    return memo[target].slice();
+  }
   if (target < 0) return null;
   if (target === 0) return [];
 
@@ -29,7 +32,8 @@ const findBestChange = (target, coins) => {
   validCoins.forEach((coin, index) => {
     const currentChange = findBestChange(
       target - coin,
-      validCoins.slice(index)
+      validCoins.slice(index),
+      memo
     );
     if (currentChange) {
       currentChange.push(coin);
@@ -41,6 +45,10 @@ const findBestChange = (target, coins) => {
       bestChange = currentChange;
     }
   });
+
+  if (bestChange) {
+    memo[target] = bestChange.slice();
+  }
 
   return bestChange;
 };
