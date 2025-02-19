@@ -76,7 +76,54 @@ const quicksort = (scores) => {
 
 const unsortedScores = [37, 89, 41, 40, 40, 40, 40, 65, 91, 53];
 
-console.log(quicksort(unsortedScores));
+// console.log(quicksort(unsortedScores));
+
+const mergeSort = (scores) => {
+  // base case
+  if (scores.length < 2) {
+    return scores;
+  }
+  // recursive case
+  const midpoint = Math.floor(scores.length / 2);
+  const leftHalf = scores.slice(0, midpoint);
+  const rightHalf = scores.slice(midpoint);
+  const sortedLeft = mergeSort(leftHalf);
+  const sortedRight = mergeSort(rightHalf);
+
+  const sorted = merge(sortedLeft, sortedRight);
+  return sorted;
+};
+
+const merge = (leftHalf, rightHalf) => {
+  const mergedArray = [];
+  let leftIndex = 0;
+  let rightIndex = 0;
+
+  while (leftIndex < leftHalf.length && rightIndex < rightHalf.length) {
+    const num1 = leftHalf[leftIndex];
+    const num2 = rightHalf[rightIndex];
+    if (num1 < num2) {
+      mergedArray.push(num1);
+      leftIndex++;
+    } else {
+      mergedArray.push(num2);
+      rightIndex++;
+    }
+    // if either of the following conditions run, we are on the last iteration of the loop
+    if (leftIndex === leftHalf.length) {
+      // place remaining rightHalf nums into mergedArray
+      mergedArray.push(...rightHalf.slice(rightIndex)); // use spread operator to avoid nesting the array .slice() returns inside mergedArray
+    } else if (rightIndex === rightHalf.length) {
+      // place remaining leftHalf nums into mergedArray
+      mergedArray.push(...leftHalf.slice(leftIndex));
+    }
+  }
+  return mergedArray;
+};
+
+console.log(mergeSort([5, 4, 3, 2, 1])); // [1, 2, 3, 4, 5]
+console.log(mergeSort([30, 55, 83, 12, 34, 7, 2])); // [2, 7, 12, 30, 34, 55, 83]
+console.log(mergeSort([])); // []
 
 // Optimal Solution
 // We can build an array scoreCounts where the indices represent scores and the values represent how many times the score appears in unsortedScores.
