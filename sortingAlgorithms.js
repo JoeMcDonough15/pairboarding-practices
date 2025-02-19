@@ -78,6 +78,9 @@ const unsortedScores = [37, 89, 41, 40, 40, 40, 40, 65, 91, 53];
 
 // console.log(quicksort(unsortedScores));
 
+// Time Complexity - O(n * log(n)) // logarithmic to account for the recursive depth times linear to account for all the iterations we need to make over leftHalf and rightHalf in our merge helper function as well as the linear complexity slice() gives us to figure out what our left and right halves should encompass. --> log(n) * 2n, --> log(n) * n
+// Space Complexity - O(n) // even though we are recursing, we shouldn't need to keep track of leftHalf, rightHalf, or mergedArray in any parent function calls; only the currently active function call.  Sequential storage vs. simultaneous storage.
+
 const mergeSort = (scores) => {
   // base case
   if (scores.length < 2) {
